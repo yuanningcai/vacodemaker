@@ -14,8 +14,7 @@ public class BMPWriter
     public static void write(BufferedImage img, FileOutputStream fos) 
     {
         int width = img.getWidth();
-        //int tripleWidth = width * 3;
-        int tripleWidth = width;
+        int tripleWidth = width * 3;
         int height = img.getHeight();
         int fullTriWidth = tripleWidth % 4 == 0 ? tripleWidth
                 : 4 * ((tripleWidth / 4) + 1);
@@ -27,13 +26,9 @@ public class BMPWriter
         for (int i = height - 1; i >= 0; i--) {
             for (int j = 0; j < width; j++) {
                 int pixel = px[i * width + j];
-                //rgbs[index++] = (byte) pixel;
-                //rgbs[index++] = (byte) (pixel >>> 8);
-                //rgbs[index++] = (byte) (pixel >>> 16);
-                byte r = (byte) pixel;
-                byte g = (byte) (pixel >>> 8);
-                byte b = (byte) (pixel >>> 16);
-                rgbs[index++] = r;
+                rgbs[index++] = (byte) pixel;
+                rgbs[index++] = (byte) (pixel >>> 8);
+                rgbs[index++] = (byte) (pixel >>> 16);
             }
         }
         // 补齐扫描行长度为4的倍数
@@ -54,11 +49,9 @@ public class BMPWriter
         int infoheader = 40;
         int board = 0;
         int offset = fheader + infoheader + board;
-        //int length = width * height * 3 + offset;
-        int length = fullTriWidth * height + offset;
+        int length = fullTriWidth * height * 3 + offset;
         short frame = 1;
-        //short deep = 24;
-        short deep = 8;
+        short deep = 24;
         int fbl = 3800;
         DataOutputStream dos = null;
         try {

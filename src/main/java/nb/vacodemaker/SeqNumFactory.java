@@ -14,6 +14,11 @@ public class SeqNumFactory implements WordFactory
 	{
 		return curr;
 	}
+	
+	public String getCurrStr()
+	{
+		return String.format(format, curr);
+	}
 
 	public int getMin() 
 	{

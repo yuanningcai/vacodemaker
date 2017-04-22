@@ -1,41 +1,19 @@
 package nb.vacodemaker;
 
-import org.patchca.color.GradientColorFactory;
-import org.patchca.color.SingleColorFactory;
-import org.patchca.filter.predefined.*;
-import org.patchca.service.Captcha;
-import org.patchca.service.ConfigurableCaptchaService;
-import org.patchca.utils.encoder.EncoderHelper;
-
-import java.awt.Color;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-public class bootstrap 
+public class BootStrap 
 {
 	public static void main(String[] args)
 	{
-		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
-        cs.setColorFactory(new GradientColorFactory());
-        cs.setFilterFactory(new DiffuseRippleFilterFactory());
-        SeqNumFactory snf = new SeqNumFactory();
-        cs.setWordFactory(snf);
-
-        try
-        {
-        	for(int i = 0; i < 10; i++)
-        	{
-        		FileOutputStream fos = new FileOutputStream(String.format("vacode_%d.bmp", i));
-        		System.out.println(snf.getCurr());
-        		//EncoderHelper.getChallangeAndWriteImage(cs, "jpg", fos);
-        		Captcha captcha = cs.getCaptcha();
-        		BMPWriter.write(captcha.getImage(), fos);
-        		fos.close();
-        	}
-        }
-        catch(Exception e)
-        {
-        	
-        }
+		String[] filter_flags = {"rdcbmsw", "rdcb", "cbmsw", "dcbms", "bcwsr"};
+		int max_workers = 1;
+		
+		for(int i = 0; i < max_workers; i++)
+		{
+			String filter_flag = filter_flags[i % filter_flags.length];
+			String bin_name = String.format("vacode_%02d.bin", i);
+			new Thread(new Worker(filter_flag, bin_name)).start();
+		}
 	}
+	
+
 }
