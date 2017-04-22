@@ -15,7 +15,7 @@ function build()
 function run()
 {
         cd $src_path
-        java  -classpath $jars nb.vacodemaker.bootstrap
+        java -classpath $jars nb.vacodemaker.bootstrap
 }       
 
 build;
