@@ -1,11 +1,14 @@
 package nb.vacodemaker;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 public class BootStrap 
 {
 	public static void main(String[] args)
 	{
-		String[] filter_flags = {"rdcbmsw", "rdcb", "cbmsw", "dcbms", "bcwsr"};
-		int max_workers = 1;
+		String[] filter_flags = {"rdcb", "cbmsw", "dcbms", "bcwsr"};
+		int max_workers = 10;
 		
 		for(int i = 0; i < max_workers; i++)
 		{

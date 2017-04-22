@@ -1,5 +1,6 @@
 package nb.vacodemaker;
 
+import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 
 import org.patchca.color.SingleColorFactory;
@@ -28,15 +29,21 @@ public class Worker implements Runnable
         cs.setColorFactory(new SingleColorFactory());
         cs.setFilterFactory(new CombineFilterFactory(filter_flag));
         cs.setWordFactory(snf);
+        cs.setHeight(60);
+        cs.setWidth(60);
         
         try
         {
         	FileOutputStream fos = new FileOutputStream(bin_name);
         	
-        	for(int i = 0; i < 10; i++)
+        	for(int i = 0; i < 6000; i++)
         	{
-        		BinWriter.writeLable(snf.getCurrStr(), fos);
-        		BinWriter.writeImg(cs.getCaptcha().getImage(), fos);
+        		String lable = snf.getCurrStr();
+        		BufferedImage img = cs.getCaptcha().getImage();
+        		BinWriter.writeLable(lable, fos);
+        		BinWriter.writeImg(img, fos);
+        		Thread.sleep(200);
+        		//BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", lable)));
         	}
         	
         	fos.close();
