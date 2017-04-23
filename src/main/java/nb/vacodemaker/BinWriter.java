@@ -33,11 +33,11 @@ public class BinWriter
 	public static void writeLable(String lable, FileOutputStream fos) throws Exception
 	{
 		int len = lable.length();
-		fos.write(len);
+		//fos.write(len);
 		
 		for(int i = 0; i < len; i++)
 		{
-			fos.write(lable.charAt(i));
+			fos.write(lable.charAt(i) - '0');
 		}
 		
 	}
