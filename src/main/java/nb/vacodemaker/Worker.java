@@ -22,28 +22,32 @@ public class Worker implements Runnable
 	{
 		SeqNumFactory snf = new SeqNumFactory();
 		snf.setMin(0);
-		snf.setMax(9);
-		snf.setFormat("%d");
+		snf.setMax(9999);
+		snf.setFormat("%04d");
 		
 		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
         cs.setColorFactory(new SingleColorFactory());
         cs.setFilterFactory(new CombineFilterFactory(filter_flag));
         cs.setWordFactory(snf);
-        cs.setHeight(60);
-        cs.setWidth(60);
+        cs.setHeight(40);
+        cs.setWidth(120);
         
         try
         {
         	FileOutputStream fos = new FileOutputStream(bin_name);
         	
-        	for(int i = 0; i < 6000; i++)
+        	for(int i = 0; i < 20000; i++)
         	{
         		String lable = snf.getCurrStr();
         		BufferedImage img = cs.getCaptcha().getImage();
         		BinWriter.writeLable(lable, fos);
         		BinWriter.writeImg(img, fos);
-        		Thread.sleep(200);
         		//BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", lable)));
+        		
+        		if(i % 100 == 0)
+        		{
+        			Thread.sleep(200);
+        		}
         	}
         	
         	fos.close();
