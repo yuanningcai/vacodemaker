@@ -64,6 +64,11 @@ public class CombineFilterFactory extends AbstractFilterFactory
 			{
 				filters.add(new SoftenImageOp());
 			}
+			
+			if(flags.indexOf('t') > 0)
+			{
+				filters.add(new SimpleTransformImageOp());
+			}
 		}
 		
 		return filters;

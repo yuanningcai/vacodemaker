@@ -1,5 +1,6 @@
 package nb.vacodemaker;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 
@@ -20,33 +21,41 @@ public class Worker implements Runnable
 	@Override
 	public void run() 
 	{
-		SeqNumFactory snf = new SeqNumFactory();
-		snf.setMin(0);
-		snf.setMax(9999);
-		snf.setFormat("%04d");
-		
-		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
-        cs.setColorFactory(new SingleColorFactory());
-        cs.setFilterFactory(new CombineFilterFactory(filter_flag));
-        cs.setWordFactory(snf);
-        cs.setHeight(40);
-        cs.setWidth(120);
-        
         try
         {
+        	//SeqNumFactory snf = new SeqNumFactory();
+    		//snf.setMin(0);
+    		//snf.setMax(9999);
+    		//snf.setFormat("%04d");
+    		
+    		StringBuilder sb = new StringBuilder();
+    		for(int i = 65; i < 75; i++)
+    		{
+    			sb.append((char)i);
+    		}
+    		
+        	SeqCharFactory scf = new SeqCharFactory(sb.toString());
+    		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
+    		cs.setTextRenderer(new HollowTextRenderer());
+            cs.setColorFactory(new SingleColorFactory());
+            cs.setFilterFactory(new CombineFilterFactory(filter_flag));
+            cs.setWordFactory(scf);
+            cs.setHeight(40);
+            cs.setWidth(40);
+            
         	FileOutputStream fos = new FileOutputStream(bin_name);
         	
-        	for(int i = 0; i < 20000; i++)
+        	for(int i = 65; i < 75; i++)
         	{
-        		String lable = snf.getCurrStr();
+        		String lable = scf.getCurrStr();
         		BufferedImage img = cs.getCaptcha().getImage();
         		BinWriter.writeLable(lable, fos);
         		BinWriter.writeImg(img, fos);
-        		//BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", lable)));
+        		BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", lable)));
         		
         		if(i % 100 == 0)
         		{
-        			Thread.sleep(200);
+        			//Thread.sleep(200);
         		}
         	}
         	
@@ -56,7 +65,6 @@ public class Worker implements Runnable
         {
         	
         }
-		
 	}
 
 }
