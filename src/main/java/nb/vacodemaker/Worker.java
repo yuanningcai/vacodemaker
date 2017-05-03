@@ -23,31 +23,31 @@ public class Worker implements Runnable
 	{
         try
         {
-        	//SeqNumFactory snf = new SeqNumFactory();
-    		//snf.setMin(0);
-    		//snf.setMax(9999);
-    		//snf.setFormat("%04d");
+        	SeqNumFactory snf = new SeqNumFactory();
+    		snf.setMin(0);
+    		snf.setMax(9999);
+    		snf.setFormat("%04d");
     		
-    		StringBuilder sb = new StringBuilder();
+    		/*StringBuilder sb = new StringBuilder();
     		for(int i = 65; i < 75; i++)
     		{
     			sb.append((char)i);
-    		}
+    		}*/
     		
-        	SeqCharFactory scf = new SeqCharFactory(sb.toString());
+        	//SeqCharFactory scf = new SeqCharFactory(sb.toString());
     		ConfigurableCaptchaService cs = new ConfigurableCaptchaService();
-    		cs.setTextRenderer(new HollowTextRenderer());
+    		//cs.setTextRenderer(new HollowTextRenderer());
             cs.setColorFactory(new SingleColorFactory());
             cs.setFilterFactory(new CombineFilterFactory(filter_flag));
-            cs.setWordFactory(scf);
+            cs.setWordFactory(snf);
             cs.setHeight(40);
-            cs.setWidth(40);
+            cs.setWidth(120);
             
         	FileOutputStream fos = new FileOutputStream(bin_name);
         	
-        	for(int i = 65; i < 75; i++)
+        	for(int i = 0; i < 10000; i++)
         	{
-        		String lable = scf.getCurrStr();
+        		String lable = snf.getCurrStr();
         		BufferedImage img = cs.getCaptcha().getImage();
         		BinWriter.writeLable(lable, fos);
         		BinWriter.writeImg(img, fos);
@@ -55,7 +55,7 @@ public class Worker implements Runnable
         		
         		if(i % 100 == 0)
         		{
-        			//Thread.sleep(200);
+        			Thread.sleep(1000);
         		}
         	}
         	
