@@ -30,42 +30,42 @@ public class CombineFilterFactory extends AbstractFilterFactory
 		{
 			filters = new ArrayList<BufferedImageOp>();
 			
-			if(flags.indexOf('w') > 0)
+			if(flags.indexOf('w') >= 0)
 			{
 				filters.add(new WobbleImageOp());
 			}
 			
-			if(flags.indexOf('r') > 0)
+			if(flags.indexOf('r') >= 0)
 			{
 				filters.add(new RippleImageOp());
 			}
 			
-			if(flags.indexOf('d') > 0)
+			if(flags.indexOf('d') >= 0)
 			{
 				filters.add(new DiffuseImageOp());
 			}
 			
-			if(flags.indexOf('c') > 0)
+			if(flags.indexOf('c') >= 0)
 			{
 				filters.add(new CurvesImageOp());
 			}
 			
-			if(flags.indexOf('b') > 0)
+			if(flags.indexOf('b') >= 0)
 			{
 				filters.add(new BlurImageOp());
 			}
 			
-			if(flags.indexOf('m') > 0)
+			if(flags.indexOf('m') >= 0)
 			{
 				filters.add(new MarbleImageOp());
 			}
 			
-			if(flags.indexOf('s') > 0)
+			if(flags.indexOf('s') >= 0)
 			{
 				filters.add(new SoftenImageOp());
 			}
 			
-			if(flags.indexOf('t') > 0)
+			if(flags.indexOf('t') >= 0)
 			{
 				filters.add(new SimpleTransformImageOp());
 			}

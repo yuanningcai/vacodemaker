@@ -1,8 +1,6 @@
 package nb.vacodemaker;
 
-import org.patchca.word.WordFactory;
-
-public class SeqNumFactory implements WordFactory
+public class SeqNumFactory implements SeqWordFactory
 {
 	private int curr = 0;
 	private int min = 0;
@@ -19,6 +17,19 @@ public class SeqNumFactory implements WordFactory
 	{
 		return String.format(format, curr);
 	}
+	
+	public char[] getCurrLable()
+	{
+		char[] ori = getCurrStr().toCharArray();
+		char[] ret = new char[ori.length];
+		
+		for(int i = 0; i < ret.length; i++)
+		{
+			ret[i] = (char)(ori[i] - '0');
+		}
+		
+		return ret;
+	}
 
 	public int getMin() 
 	{
@@ -28,6 +39,7 @@ public class SeqNumFactory implements WordFactory
 	public void setMin(int min) 
 	{
 		this.min = min;
+		this.curr = min;
 	}
 
 	public int getMax() 

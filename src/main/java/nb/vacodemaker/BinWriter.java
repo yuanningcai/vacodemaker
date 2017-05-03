@@ -30,15 +30,11 @@ public class BinWriter
         fos.write(rgbs);
 	}
 	
-	public static void writeLable(String lable, FileOutputStream fos) throws Exception
+	public static void writeLable(char[] lable, FileOutputStream fos) throws Exception
 	{
-		int len = lable.length();
-		//fos.write(len);
-		
-		for(int i = 0; i < len; i++)
+		for(int i = 0; i < lable.length; i++)
 		{
-			fos.write(lable.charAt(i) - '0');
+			fos.write(lable[i]);
 		}
-		
 	}
 }

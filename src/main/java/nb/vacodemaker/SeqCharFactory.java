@@ -1,8 +1,6 @@
 package nb.vacodemaker;
 
-import org.patchca.word.WordFactory;
-
-public class SeqCharFactory implements WordFactory
+public class SeqCharFactory implements SeqWordFactory
 {
 	private String char_seq;
 	private String curr_char;
@@ -23,6 +21,19 @@ public class SeqCharFactory implements WordFactory
 	public String getCurrStr()
 	{
 		return char_seq.substring(idx, idx + 1);
+	}
+	
+	public char[] getCurrLable()
+	{
+		char[] ori = getCurrStr().toCharArray();
+		char[] ret = new char[ori.length];
+		
+		for(int i = 0; i < ret.length; i++)
+		{
+			ret[i] = (char)(ori[i] - '!');
+		}
+		
+		return ret;
 	}
 
 	public String getNextWord()
