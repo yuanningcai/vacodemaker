@@ -3,6 +3,8 @@ package nb.vacodemaker;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 
+import javax.imageio.ImageIO;
+
 import org.patchca.color.SingleColorFactory;
 import org.patchca.service.ConfigurableCaptchaService;
 
@@ -13,6 +15,7 @@ public class Worker implements Runnable
 	public String bin_name = "vacode.bin";
 	public boolean use_hollow = false;
 	public boolean write_bmp = false;
+	public boolean write_png = false;
 	public int height = 40;
 	public int width = 40;
 	public int num = 10;
@@ -52,6 +55,11 @@ public class Worker implements Runnable
         		if(write_bmp)
         		{
         			BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", str)));
+        		}
+        		
+        		if(write_png)
+        		{
+        			ImageIO.write(img, "png", new FileOutputStream(String.format("img_%s.png", str)));
         		}
         		
         		if(i % 20 == 0)
