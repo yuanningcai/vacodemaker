@@ -46,7 +46,17 @@ public class Worker implements Runnable
         	
         	for(int i = 0; i < num; i++)
         	{
+        		int asc = i;
         		String str = swf.getCurrStr();
+        		if(str != null)
+        		{
+        			char[] ca = str.toCharArray();
+            		if(ca != null && ca.length > 0)
+            		{
+            			asc = Integer.valueOf(ca[0]);
+            		}
+        		}
+        		
         		char[] lable = swf.getCurrLable();
         		BufferedImage img = cs.getCaptcha().getImage();
         		BinWriter.writeLable(lable, fos);
@@ -54,12 +64,12 @@ public class Worker implements Runnable
         		
         		if(write_bmp)
         		{
-        			BMPWriter.write(img, new FileOutputStream(String.format("img_%s.bmp", str)));
+        			BMPWriter.write(img, new FileOutputStream(String.format("img_%03d.bmp", asc)));
         		}
         		
         		if(write_png)
         		{
-        			ImageIO.write(img, "png", new FileOutputStream(String.format("img_%s.png", str)));
+        			ImageIO.write(img, "png", new FileOutputStream(String.format("img_%03d.png", asc)));
         		}
         		
         		if(i % 20 == 0)
