@@ -36,7 +36,7 @@ public class HollowTextRenderer extends BestFitTextRenderer
 		for (TextCharacter tc : ts.getCharacters()) {
 			float x = (float) tc.getX();
 			float y = (float) tc.getY();
-			
+					
 			g.setColor(tc.getColor());
 			g.drawString(tc.iterator(), x - 1, y - 1);
 			g.drawString(tc.iterator(), x - 1, y + 1);
