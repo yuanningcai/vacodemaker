@@ -5,8 +5,8 @@ public class BootStrap
 	public static void main(String[] args)
 	{
 		String[] fonts = {"Alfredo Heavy Hollow", "MY TURTLE", "FZ ROMAN 28 HOLLOW EX", "王漢宗新粗標魏碑空心"};
-		String[] filter_flags = {"", "t", "ct"};
-		boolean[] use_hollow_flags = {false, false, false};
+		String[] filter_flags = {"", "", "", ""};
+		boolean[] use_hollow_flags = {false, false, false, false};
 		int max_workers = 30;
 		
 		try
@@ -47,7 +47,7 @@ public class BootStrap
 				w.write_png = false;
 				w.height = 40;
 				w.width = 40;
-				w.num = 300 * 52;
+				w.num = 200 * 52;
 				
 				if(sffs.length > 0)
 				{
