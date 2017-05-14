@@ -4,8 +4,9 @@ public class BootStrap
 {
 	public static void main(String[] args)
 	{
-		String[] filter_flags = {"", "", "t"};
-		boolean[] use_hollow_flags = {false, true, true};
+		String[] fonts = {"Alfredo Heavy Hollow", "MY TURTLE", "FZ ROMAN 28 HOLLOW EX", "王漢宗新粗標魏碑空心"};
+		String[] filter_flags = {"", "t", "ct"};
+		boolean[] use_hollow_flags = {false, false, false};
 		int max_workers = 30;
 		
 		try
@@ -27,31 +28,49 @@ public class BootStrap
 			{
 				sb.append((char)i);
 			}
-			
-	    	SeqCharFactory scf = new SeqCharFactory(sb.toString());
+	    	
+	    	SimpleFontFactory[] sffs = new SimpleFontFactory[fonts.length];
+	    	
+	    	for(int i = 0; i < fonts.length; i++)
+	    	{
+	    		sffs[i] = new SimpleFontFactory();
+	    		sffs[i].family = fonts[i];
+	    		sffs[i].bold = true;
+	    	}
 			
 			for(int i = 1; i <= max_workers; i++)
 			{
 				Worker w = new Worker();
-				w.swf = scf;
+				w.swf = new SeqCharFactory(sb.toString());
 				w.bin_name = String.format("vacode_%02d.bin", i);
-				w.filter_flag = filter_flags[(i - 1) % filter_flags.length];
-				w.use_hollow = use_hollow_flags[(i - 1) % use_hollow_flags.length];
 				w.write_bmp = false;
 				w.write_png = false;
 				w.height = 40;
 				w.width = 40;
 				w.num = 300 * 52;
-
+				
+				if(sffs.length > 0)
+				{
+					w.ff = sffs[(i - 1) % sffs.length];
+				}
+				
+				if(filter_flags.length > 0)
+				{
+					w.filter_flag = filter_flags[(i - 1) % filter_flags.length];
+				}
+				
+				if(use_hollow_flags.length > 0)
+				{
+					w.use_hollow = use_hollow_flags[(i - 1) % use_hollow_flags.length];
+				}
+				
 				new Thread(w).start();
 			}
 		}
 		catch(Exception e)
 		{
-			
+			//System.out.println(e);
 		}
-		
-		
 	}
 	
 
