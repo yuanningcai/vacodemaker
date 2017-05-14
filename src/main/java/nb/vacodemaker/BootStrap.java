@@ -18,7 +18,12 @@ public class BootStrap
 			
 			//ascii
 			StringBuilder sb = new StringBuilder();
-			for(int i = 33; i <= 126; i++)
+			for(int i = 65; i <= 90; i++)
+			{
+				sb.append((char)i);
+			}
+			
+			for(int i = 97; i <= 122; i++)
 			{
 				sb.append((char)i);
 			}
@@ -33,9 +38,10 @@ public class BootStrap
 				w.filter_flag = filter_flags[(i - 1) % filter_flags.length];
 				w.use_hollow = use_hollow_flags[(i - 1) % use_hollow_flags.length];
 				w.write_bmp = false;
+				w.write_png = false;
 				w.height = 40;
 				w.width = 40;
-				w.num = 200 * 94;
+				w.num = 300 * 52;
 
 				new Thread(w).start();
 			}
