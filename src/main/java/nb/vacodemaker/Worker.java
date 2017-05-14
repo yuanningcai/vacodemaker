@@ -6,11 +6,13 @@ import java.io.FileOutputStream;
 import javax.imageio.ImageIO;
 
 import org.patchca.color.SingleColorFactory;
+import org.patchca.font.FontFactory;
 import org.patchca.service.ConfigurableCaptchaService;
 
 public class Worker implements Runnable 
 {
 	public SeqWordFactory swf = null;
+	public FontFactory ff = null;
 	public String filter_flag = "wrdcbmst";
 	public String bin_name = "vacode.bin";
 	public boolean use_hollow = false;
@@ -34,6 +36,11 @@ public class Worker implements Runnable
         cs.setWordFactory(swf);
         cs.setHeight(height);
         cs.setWidth(width);
+        
+        if(ff != null)
+        {
+        	cs.setFontFactory(ff);
+        }
         
         if(use_hollow)
         {
