@@ -1,5 +1,9 @@
 package nb.vacodemaker;
 
+import java.util.Arrays;
+
+import org.patchca.font.RandomFontFactory;
+
 public class BootStrap 
 {
 	public static void main(String[] args)
@@ -28,15 +32,6 @@ public class BootStrap
 			{
 				sb.append((char)i);
 			}
-	    	
-	    	SimpleFontFactory[] sffs = new SimpleFontFactory[fonts.length];
-	    	
-	    	for(int i = 0; i < fonts.length; i++)
-	    	{
-	    		sffs[i] = new SimpleFontFactory();
-	    		sffs[i].family = fonts[i];
-	    		sffs[i].bold = true;
-	    	}
 			
 			for(int i = 1; i <= max_workers; i++)
 			{
@@ -49,10 +44,10 @@ public class BootStrap
 				w.width = 40;
 				w.num = 200 * 52;
 				
-				if(sffs.length > 0)
-				{
-					w.ff = sffs[(i - 1) % sffs.length];
-				}
+				RandomFontFactory rff = new RandomFontFactory();
+				rff.setRandomStyle(true);
+				rff.setFamilies(Arrays.asList(fonts));
+				w.ff = rff;
 				
 				if(filter_flags.length > 0)
 				{
